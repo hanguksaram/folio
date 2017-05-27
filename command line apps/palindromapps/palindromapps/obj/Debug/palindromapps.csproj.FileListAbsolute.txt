@@ -1,0 +1,6 @@
+c:\users\admin\documents\visual studio 2017\Projects\palindromapps\palindromapps\obj\Debug\palindromapps.csprojResolveAssemblyReference.cache
+c:\users\admin\documents\visual studio 2017\Projects\palindromapps\palindromapps\bin\Debug\palindromapps.exe.config
+c:\users\admin\documents\visual studio 2017\Projects\palindromapps\palindromapps\bin\Debug\palindromapps.exe
+c:\users\admin\documents\visual studio 2017\Projects\palindromapps\palindromapps\bin\Debug\palindromapps.pdb
+c:\users\admin\documents\visual studio 2017\Projects\palindromapps\palindromapps\obj\Debug\palindromapps.exe
+c:\users\admin\documents\visual studio 2017\Projects\palindromapps\palindromapps\obj\Debug\palindromapps.pdb

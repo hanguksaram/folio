@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – приложение ASP.NET</title>
+    <!--css couldnt be rendered into html, dunno why-->
+    
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header class="container">
+        <div class="row">
+            <h1 class="col-sm-8"></h1>
+            
+        </div>
+    </header>
+
+
+        @RenderBody()
+
+    <footer class="container">
+        <div class="row">
+            <p class="col-sm-4">&copy; 2017 developed by hanguksaram</p>
+            
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

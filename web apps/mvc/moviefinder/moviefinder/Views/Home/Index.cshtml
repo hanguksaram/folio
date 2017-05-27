@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+
+   
+}
+<!--simple bootstrap row-design implementation-->
+<section class="jumbotron">
+    <div class="container">
+        <div class="row text-center">
+            <h2>
+                Smart Movie's
+                Finder
+            </h2>
+            <label for="ex3">Enter title, year, genre or actor</label>
+            <input class="form-control" id="inputfield" type="search" placeholder="Enter movie info...">
+            <input type="submit" class="btn btn-primary" value="GO!" id="datasender">
+                <div class="container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Genre</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                            <tbody id="tabledata">
+                            </tbody>
+                    </table>
+                </div>
+            
+         </div>
+    </div>
+</section>
+
+
+
+@section scripts
+{
+
+<script>
+        $(function () {
+            $("#datasender").click(function () {
+                makeRequest($("#inputfield").val());
+            });
+
+           
+            function makeRequest(id) {
+                
+                
+                //implement asynchronous requests to improve web app perfomance 
+                $.ajax({
+                    url: "@Url.Action("JsonMovieData")",
+                    type: "GET",
+                    data: "id=" + id,
+                    success: function (response) {
+                        //parse json data sending from server to table view
+                        var target = $("#tabledata");
+                        target.empty();
+
+                        for (var i = 0; i < response.length; i++) {
+                            target.append("<tr><td>"
+                                + response[i].name + "</td><td>"
+                                + response[i].genre + "</td><td>"
+                                + response[i].movieYear + "</td></tr>");
+                        }
+                    }
+                });
+            }
+        });
+
+    //regular expression input form validation implemetnation,  some fixes with bundleconfig to include jquery-bootstrap validation framework are required.
+    $(function () {
+        $('#').formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                fullName: {
+                    validators: {
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9]+$/,
+                            message: 'Input only latin letters or digits'
+                        }
+                    }
+                }
+            } 
+        });
+    });
+</script>
+}
