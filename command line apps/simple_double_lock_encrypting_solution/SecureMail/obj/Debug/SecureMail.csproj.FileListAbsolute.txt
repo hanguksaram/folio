@@ -1,0 +1,5 @@
+C:\Users\Admin\Desktop\Новая папка\SecureMail\bin\Debug\SecureMail.dll
+C:\Users\Admin\Desktop\Новая папка\SecureMail\bin\Debug\SecureMail.pdb
+C:\Users\Admin\Desktop\Новая папка\SecureMail\obj\Debug\SecureMail.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\Новая папка\SecureMail\obj\Debug\SecureMail.dll
+C:\Users\Admin\Desktop\Новая папка\SecureMail\obj\Debug\SecureMail.pdb
