@@ -1,0 +1,4 @@
+﻿<div class="tag-template">
+    <span>{{data.SkillName}} <span class="badge">{{data.Level}}</span> <span class="label label-success" ng-if="data.Preference==1">{{data.Preference | preference}}</span><span class="label label-danger" ng-if="data.Preference==0">{{data.Preference | preference}}</span></span>
+    <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+</div>

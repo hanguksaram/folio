@@ -1,0 +1,93 @@
+﻿<div id="employee-contacts" class="container-fluid" ng-controller="EmployeeEditController">
+    <!-- FirstName LastName -->
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 style="margin-top:0px">{{employee.FirstName}} {{employee.LastName}}</h1>
+            <div>{{routeParams}}</div>
+        </div>
+        <div class="col-sm-4">
+            <div class="pull-right">
+                <button ng-click="saveEmployee()" class="btn btn-primary">Save changes</button>
+                <button ng-click="cancel()" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div><!-- /FirstName LastName -->
+    <!-- Properties -->
+    <div class="row">
+        <div class="col-sm-4">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Position
+                    <a href="#" editable-select="employee.Position.ID" onshow="loadPositions()"
+                       e-ng-options="p.ID as p.PositionName for p in positions">
+                        {{employee.Position.PositionName}}
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    Hire date
+                    <a href="#" editable-date="employee.HiringDate" e-required>{{employee.HiringDate | date: 'mediumDate'}}</a>
+                </li>
+                <li class="list-group-item">
+                    Birthday
+                    <a href="#" editable-date="employee.BirthDate" e-required>{{employee.BirthDate | date: 'mediumDate'}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <ul class="list-group" ng-show="showProperties">
+                <li class="list-group-item" ng-repeat="property in employee.Properties | filter : propertyFilter">
+                    <employee-prop type="getTypeProperty(property)" property="property" method-for-button="deletePropertyFromEmployee(property)"></employee-prop>
+                </li>
+            </ul>
+            <!-- Form add property -->
+            <form class="form-inline" ng-if="newProperty" ng-submit="addNewPropertyToEmployee()">
+                <div class="form-group">
+                    <label class="sr-only" for="propertyType">Property type</label>
+                    <select id="propertyType" class="form-control" ng-model="newProperty.PropertyType">
+                        <option ng-repeat="option in propertyTypes | filter : propertyTypeFilter | filter : alreadyAddedFilter" ng-value="option.PropertyTypeName">{{option.PropertyTypeName}}</option>
+                    </select>
+                </div>
+                <input-employee-prop type="getTypeProperty(newProperty)" property="newProperty"></input-employee-prop>
+                <input type="submit" class="btn btn-primary" ng-click="addNewPropertyToEmployee()" ng-disabled="!newProperty.PropertyType" value="Add" />
+                <button class="btn btn-default" ng-click="cancelAddProperty()"><i class="fa fa-close"></i></button>
+            </form><!-- /Form add property -->
+            <a href="#" ng-click="addNewProperty()" ng-if="!newProperty">+ add new property</a>
+        </div>
+        <div class="col-sm-4"></div>
+    </div><!-- /Properties -->
+    <hr />
+    <!-- Contacts -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Contacts</h2>
+        </div>
+        <div class="col-sm-4">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="property in employee.Properties | filter : primaryContactFilter | orderBy : primaryContactOrder">
+                    <employee-prop type="getTypeProperty(property)" property="property" method-for-button="deletePropertyFromEmployee(property)"></employee-prop>
+                </li>
+            </ul>
+            <!-- Form add contact -->
+            <form class="form-inline" ng-if="newContact" ng-submit="addNewContactToEmployee()">
+                <div class="form-group">
+                    <label class="sr-only" for="contactType">Contact type</label>
+                    <select id="contactType" class="form-control" ng-model="newContact.PropertyType">
+                        <option ng-repeat="option in propertyTypes | filter : contactTypeFilter | filter : alreadyAddedFilter" ng-value="option.PropertyTypeName">{{option.PropertyTypeName}}</option>
+                    </select>
+                </div>
+                <input-employee-prop type="getTypeProperty(newContact)" property="newContact"></input-employee-prop>
+                <input type="submit" class="btn btn-primary" ng-disabled="!newContact.PropertyType" value="Add" />
+                <button class="btn btn-default" ng-click="cancelAddContact()"><i class="fa fa-close"></i></button>
+            </form><!-- /Form add contact -->
+            <a href="#" ng-click="addNewContact()" ng-if="!newContact">+ add new contact</a>
+        </div>
+        <div class="col-sm-4">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="property in employee.Properties | filter : contactFilter">
+                    <employee-prop type="getTypeProperty(property)" property="property" method-for-button="deletePropertyFromEmployee(property)"></employee-prop>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-4"></div>
+    </div><!-- /Contacts -->
+</div>

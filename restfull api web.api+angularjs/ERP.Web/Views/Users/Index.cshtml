@@ -1,0 +1,122 @@
+﻿<div ng-controller="UsersController">
+    
+    <div class="text-left"><h3>Users</h3></div>
+    <div class="container-fluid text-right" style="margin-bottom: 10px;"><button class="btn btn-primary" ng-click="addUser()"><i class="fa fa-plus"></i> Add User</button></div>
+
+    <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th style="width: 22%" >First Name</th>
+                <th style="width: 22%" >Last Name</th>
+                <th style="width: 23%" >Email</th>
+                <th style="width: 23%" >Title</th>
+                <th style="width: 10%"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr ng-repeat="user in users">
+                <td>{{user.FirstName}}</td>
+                <td>{{user.LastName}}</td>
+                <td>{{user.Email}}</td>
+                <td>{{user.Title}}</td>
+                <td>
+                    <button ng-click="editUser({uid: user.ID})" role="button" class="btn btn-success btn-sm"> <i class="fa fa-pencil-square-o"></i> Edit</button>
+                    <button ng-click="deleteUser({uid: user.ID})" role="button" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i> Remove</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+        
+
+    <div class="modal" tabindex="-1" role="dialog" id="userModal" data-backdrop="static" shadow="modalUser">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{modalTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="container-fluid row-pad" name="userForm">
+                        <div class="row">
+                            <div class="col-md-2 no-lr-padding">
+                                <label for="firstName" class="control-label">First Name</label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <input type="text" name="firstName" tabindex="1" class="form-control" required placeholder="First Name" ng-model="modalUser.FirstName" autofocus>
+                            </div>
+
+                            <div class="col-md-6 no-lr-padding text-center">
+                                <label class="control-label">Change password</label>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 no-lr-padding">
+                                <label for="lastName" class="control-label">Last Name</label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <input type="text" name="lastName" tabindex="2" class="form-control" required placeholder="Last Name" ng-model="modalUser.LastName">
+                            </div>
+
+                            <div class="col-md-2 no-lr-padding">
+                                <label for="password" class="control-label">Password</label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <input type="password" name="password" tabindex="5" class="form-control" required ng-model="modalUser.Password" data-match="repeatPass" data-ng-class="{'ng-invalid':userForm.confirmPassword.$error.match}">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 no-lr-padding">
+                                <label for="email" class="control-label">Email</label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <input type="email" name="email" tabindex="3" class="form-control" required placeholder="Email" ng-model="modalUser.Email">
+                            </div>
+
+                            <div class="col-md-2 no-lr-padding">
+                                <label for="confirmPassword" class="control-label">Confirm</label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <input type="password" name="confirmPassword" tabindex="6" class="form-control" required ng-model="repeatPass" data-match="modalUser.Password" data-ng-class="{'ng-invalid':userForm.confirmPassword.$error.match}">
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 no-lr-padding">
+                                <label for="title" class="control-label">Title</label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <input type="text" name="title" tabindex="4" class="form-control" required placeholder="Title" ng-model="modalUser.Title">
+                            </div>
+
+                            <div class="col-md-6 ">
+                                &nbsp;
+                            </div>
+
+
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><i class="fa fa-ban"></i> Close</button>
+                    <button data-ng-disabled="userForm.$invalid" type="button" class="btn btn-primary" id="mSave" ng-click="saveUser()"><i class="fa fa-check"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
